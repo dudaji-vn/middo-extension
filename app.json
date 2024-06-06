@@ -3,7 +3,6 @@
     "name": "middo-extension",
     "slug": "middo-extension",
     "version": "1.0.0",
-
     "scheme": "middo-extension",
     "web": {
       "bundler": "metro",
@@ -21,28 +20,36 @@
     ],
     "experiments": {
       "typedRoutes": true,
-
       "tsconfigPaths": true
     },
-
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-
     "userInterfaceStyle": "automatic",
-
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dudajivn.middoextension"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.dudajivn.middoextension"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "6e861c18-65fa-4c75-8b86-7785d6b254bb"
       }
     }
   }
