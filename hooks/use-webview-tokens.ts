@@ -84,7 +84,7 @@ function extractTokens(tokenString: string): Tokens | null {
 }
 
 function extractRoomIdFormUrl(url: string): string | null {
-  const match = url.match(/talk\/([^?]+)/);
+  const match = url.match(/conversations\/([^?]+)/) || url.match(/archived\/([^?]+)/);
   if (match) {
     return match[1];
   }

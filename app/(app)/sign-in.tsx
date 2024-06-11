@@ -1,15 +1,17 @@
-import { Link, router } from 'expo-router';
+import { Link } from 'expo-router';
 import React from 'react';
 import { ImageBackground } from 'react-native';
 import { H3, H6, Image, Theme, View, YStack } from 'tamagui';
 
 import { MiddoLogo } from '~/components/icons/middo-logo';
-import { BottomSheet } from '~/components/modals/bottom-sheet';
+import { BottomSheet, useBottomSheetMethods } from '~/components/modals/bottom-sheet';
+import { AppleSignIn, GoogleSignIn } from '~/features/auth';
 import { Button } from '~/tamagui.config';
 
 export default function LoginScreen() {
-  const open = () => {};
-  const close = () => {};
+  const { open, close, bottomSheetRef } = useBottomSheetMethods();
+
+  const handleSignInSuccess = () => {};
 
   return (
     <ImageBackground
@@ -17,7 +19,7 @@ export default function LoginScreen() {
       source={require('~/assets/background.png')}
       style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
       <View position="absolute" top={96} left={0} px={8}>
-        <H3 color="$blue10Light"> Welcome to Middo!</H3>
+        <H3 color="$blue10Light"> Welcome to Middo's Extension!</H3>
         <H6 paddingLeft={8} mt={4}>
           Seamless Translation & Conversation that empowering the Global communication
         </H6>
@@ -28,8 +30,10 @@ export default function LoginScreen() {
           Get Started
         </Button>
       </Theme>
-      <BottomSheet>
+      <BottomSheet ref={bottomSheetRef}>
         <YStack p={12} gap={12} backgroundColor="$blue1">
+          <AppleSignIn onPress={close} onSuccess={handleSignInSuccess} />
+          <GoogleSignIn onPress={close} onSuccess={handleSignInSuccess} />
           <Link asChild href="/(app)/sign-in-email">
             <Button
               borderColor="$gray1"
