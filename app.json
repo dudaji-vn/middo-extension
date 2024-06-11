@@ -11,10 +11,54 @@
     },
     "plugins": [
       "expo-router",
+      "@react-native-firebase/app",
+      "@react-native-firebase/messaging",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Your camera is used for video calls, to take photos and record videos, and to upload a profile picture.",
+          "microphonePermission": "Your microphone is used for video calls, voice messages, and voice-to-text in conversations.",
+          "recordAudioAndroid": true
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Your photos are used to upload a profile picture, and to select photos and videos to send to others in conversations.",
+          "savePhotosPermission": "Your photos are saved to your device when you download them from conversations.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ],
+      ["expo-apple-authentication"],
+      ["expo-secure-store", {}],
+      [
+        "expo-notifications",
+        {
+          "sounds": ["./assets/message_notify.wav"],
+          "icon": "./assets/notification_icon.png"
+        }
+      ],
       [
         "expo-dev-launcher",
         {
           "launchModeExperimental": "most-recent"
+        }
+      ],
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.835558552712-pk3hvl3hpupu1acao0bobriqk9uihh18"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          },
+          "android": {
+            "extraMavenRepos": ["../../node_modules/@notifee/react-native/android/libs"]
+          }
         }
       ]
     ],
@@ -24,33 +68,56 @@
     },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "usesAppleSignIn": true,
       "supportsTablet": true,
-      "bundleIdentifier": "com.dudajivn.middoextension"
+      "bundleIdentifier": "com.dudajivn.middoextension",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to take photos and record videos, and to upload a profile picture.",
+        "NSPhotoLibraryUsageDescription": "This app uses the photo library to upload a profile picture, and to select photos and videos to send to others in conversations.",
+        "NSMicrophoneUsageDescription": "This app uses the microphone for video calls, voice messages, and voice-to-text in conversations.",
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.835558552712-pk3hvl3hpupu1acao0bobriqk9uihh18"
+            ]
+          }
+        ]
+      },
+      "buildNumber": "11"
     },
     "android": {
+      "extraMavenRepos": ["../../node_modules/@notifee/react-native/android/libs"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.dudajivn.middoextension"
+      "smallIcon": "notification_icon",
+      "package": "com.dudajivn.middoextension",
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 27
     },
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "6e861c18-65fa-4c75-8b86-7785d6b254bb"
+        "projectId": "9c4fda59-5452-4290-ad1a-17b21b2548b0"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/9c4fda59-5452-4290-ad1a-17b21b2548b0"
     }
   }
 }
