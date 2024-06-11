@@ -24,6 +24,8 @@ const androidCredentials = {
 const iosCredentials = {
   clientId: FIREBASE_IOS_CLIENT_ID,
   appId: FIREBASE_IOS_APP_ID,
+  databaseURL: '',
+  storageBucket: '',
   apiKey: FIREBASE_IOS_API_KEY,
 };
 
