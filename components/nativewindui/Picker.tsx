@@ -1,8 +1,8 @@
 import { Picker as RNPicker } from '@react-native-picker/picker';
 import { View } from 'react-native';
 
-import { cn } from '~/lib/cn';
-import { useColorScheme } from '~/lib/useColorScheme';
+import { cn } from '~/libs/cn';
+import { useColorScheme } from '~/libs/useColorScheme';
 
 export function Picker<T>({
   mode = 'dropdown',
