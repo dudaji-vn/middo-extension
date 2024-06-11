@@ -5,7 +5,7 @@ import {
 } from '@gorhom/bottom-sheet';
 import * as React from 'react';
 
-import { useColorScheme } from '~/lib/useColorScheme';
+import { useColorScheme } from '~/libs/useColorScheme';
 
 const Sheet = React.forwardRef<
   BottomSheetModal,

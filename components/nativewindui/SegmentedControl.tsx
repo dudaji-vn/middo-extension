@@ -1,7 +1,7 @@
 import RNSegmentedControl from '@react-native-segmented-control/segmented-control';
 import { Platform } from 'react-native';
 
-import { useColorScheme } from '~/lib/useColorScheme';
+import { useColorScheme } from '~/libs/useColorScheme';
 
 export function SegmentedControl(props: React.ComponentPropsWithoutRef<typeof RNSegmentedControl>) {
   const { colorScheme, colors } = useColorScheme();

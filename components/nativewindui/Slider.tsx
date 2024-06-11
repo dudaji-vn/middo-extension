@@ -1,7 +1,7 @@
 import RNSlider from '@react-native-community/slider';
 import { Platform } from 'react-native';
 
-import { useColorScheme } from '~/lib/useColorScheme';
+import { useColorScheme } from '~/libs/useColorScheme';
 import { COLORS } from '~/theme/colors';
 
 export function Slider({
