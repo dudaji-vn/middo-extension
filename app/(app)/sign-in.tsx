@@ -1,5 +1,5 @@
 import { Link, router } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ImageBackground } from 'react-native';
 import { H3, H6, Image, Theme, View, YStack } from 'tamagui';
 
@@ -9,14 +9,14 @@ import { AppleSignIn, GoogleSignIn, SignInResponse, useAuthStore } from '~/featu
 import { Button } from '~/tamagui.config';
 
 export default function LoginScreen() {
-  const { storeTokens } = useAuthStore();
+  const { storeTokens, accessToken } = useAuthStore();
   const { open, close, bottomSheetRef } = useBottomSheetMethods();
   const handleSignInSuccess = (data: SignInResponse) => {
     storeTokens({
       accessToken: data.accessToken,
       refreshToken: data.refreshToken,
     });
-    router.replace('/spaces');
+    router.push('/spaces');
   };
 
   return (

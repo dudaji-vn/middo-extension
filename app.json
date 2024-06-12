@@ -67,7 +67,7 @@
       "tsconfigPaths": true
     },
     "orientation": "portrait",
-    "icon": "./assets/ext-logo.svg",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -97,7 +97,7 @@
     "android": {
       "extraMavenRepos": ["../../node_modules/@notifee/react-native/android/libs"],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/ext-logo.svg",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "smallIcon": "notification_icon",
