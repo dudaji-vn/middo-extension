@@ -1,17 +1,23 @@
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import React from 'react';
 import { ImageBackground } from 'react-native';
 import { H3, H6, Image, Theme, View, YStack } from 'tamagui';
 
 import { MiddoLogo } from '~/components/icons/middo-logo';
 import { BottomSheet, useBottomSheetMethods } from '~/components/modals/bottom-sheet';
-import { AppleSignIn, GoogleSignIn } from '~/features/auth';
+import { AppleSignIn, GoogleSignIn, SignInResponse, useAuthStore } from '~/features/auth';
 import { Button } from '~/tamagui.config';
 
 export default function LoginScreen() {
+  const { storeTokens } = useAuthStore();
   const { open, close, bottomSheetRef } = useBottomSheetMethods();
-
-  const handleSignInSuccess = () => {};
+  const handleSignInSuccess = (data: SignInResponse) => {
+    storeTokens({
+      accessToken: data.accessToken,
+      refreshToken: data.refreshToken,
+    });
+    router.replace('/spaces');
+  };
 
   return (
     <ImageBackground
@@ -41,7 +47,7 @@ export default function LoginScreen() {
               backgroundColor="white"
               onPress={close}
               icon={<MiddoLogo color="black" />}>
-              Sign in with Middo
+              Sign in with Middo account
             </Button>
           </Link>
         </YStack>

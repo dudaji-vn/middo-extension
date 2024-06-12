@@ -11,6 +11,7 @@ export default function AppLayout() {
         headerShown: false,
       }}>
       <Stack.Screen name="sign-in" />
+      <Stack.Screen name="business-conversation" />
       <Stack.Screen
         name="sign-in-email"
         options={{

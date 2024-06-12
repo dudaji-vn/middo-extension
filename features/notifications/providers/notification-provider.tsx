@@ -23,6 +23,7 @@ export const NotificationProvider = () => {
     const checkPermission = async () => {
       const settings = await notifee.getNotificationSettings();
       const status = settings.authorizationStatus;
+      console.log('Notification status: ', status);
       switch (status) {
         case AuthorizationStatus.AUTHORIZED:
           if (isAskLater || isUnsubscribed) return;
@@ -52,12 +53,13 @@ export const NotificationProvider = () => {
     return notifee.onForegroundEvent(({ type, detail }) => {
       const { notification } = detail;
       const { url } = notification?.data as MessageData;
+      console.log('Foreground event', type, detail);
       switch (type) {
         case EventType.DISMISSED:
           console.log('User dismissed notification', detail.notification);
           break;
         case EventType.PRESS:
-          router.push('/(app)/(tabs)');
+          router.push('/spaces');
           useWebviewStore.setState({ redirectUrl: url });
           break;
         case EventType.ACTION_PRESS:
@@ -74,7 +76,7 @@ export const NotificationProvider = () => {
       const { notification } = initialNotification;
       const { url } = notification?.data as MessageData;
       useWebviewStore.setState({ redirectUrl: url });
-      router.push('/(app)/(tabs)');
+      router.push('/spaces');
     }
   }
 

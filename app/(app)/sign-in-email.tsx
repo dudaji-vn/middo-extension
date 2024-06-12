@@ -25,13 +25,15 @@ export default function LoginScreen() {
         source={{ uri }}
         onMessage={(event) => {
           const data: NativeEventData = JSON.parse(event.nativeEvent.data);
+          console.log('event (signin-email): ', event);
           if (data.type === 'Trigger' && data.data.event === 'login') {
             const payload = data.data.payload;
+            console.log('payload login', payload);
             storeTokens({
               accessToken: payload.data.accessToken,
               refreshToken: payload.data.refreshToken,
             });
-            router.replace('/(app)/sign-in');
+            router.replace('/spaces');
           }
         }}
       />
