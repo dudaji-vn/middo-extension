@@ -168,7 +168,7 @@ export const handleNotificationAction = async (detail: EventDetail) => {
       }
       break;
     case NotificationAction.VIEW_IN_DISCUSSION:
-      router.push('/(app)/(tabs)');
+      router.push('/spaces');
       useWebviewStore.setState({
         redirectUrl: url + `?r_tab=discussion&ms_id=${messageId}&${SPK_PLATFORM}=mobile`,
       });
