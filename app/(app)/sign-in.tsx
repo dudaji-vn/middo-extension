@@ -16,7 +16,7 @@ export default function LoginScreen() {
       accessToken: data.accessToken,
       refreshToken: data.refreshToken,
     });
-    router.push('/spaces');
+    router.replace('/spaces');
   };
 
   return (
