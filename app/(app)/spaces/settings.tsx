@@ -6,6 +6,7 @@ import {
   requestMicrophonePermissionsAsync,
 } from 'expo-camera';
 import { PermissionResponse, getPermissionsAsync } from 'expo-notifications';
+import { router } from 'expo-router';
 import { CheckCircle2, ChevronRightIcon, icons } from 'lucide-react-native';
 import { useEffect, useMemo, useState } from 'react';
 import { H5, H6, Text, View, XStack, YStack } from 'tamagui';
@@ -59,7 +60,9 @@ export default function SettingsScreen() {
             if (data.type === 'Trigger') {
               switch (data.data.event) {
                 case 'sign-out':
-                  logout();
+                  logout().then(() => {
+                    router.replace('/sign-in');
+                  });
                   break;
                 case 'open-app-permission':
                   open();
@@ -165,11 +168,6 @@ const PermissionList = () => {
         onDeniedPress: () => setHintType('notification'),
         type: getRealPermissionStatus(notification),
       },
-      // {
-      //   title: 'Folder',
-      //   iconName: 'Folder',
-      //   type: PermissionStatus.GRANTED,
-      // },
     ] as PermissionItemProps[];
   }, [camera, microphone, notification]);
   return (
@@ -232,7 +230,7 @@ const PermissionItem = ({
       </View>
       <H6 color={color}>{title}</H6>
       <View ml="auto">
-        {type === PermissionStatus.GRANTED ? (
+        {type === PermissionStatus.GRANTED ? (x
           <CheckCircle2 size={20} color={color} />
         ) : (
           <ChevronRightIcon size={20} color={COLORS.NEUTRAL[700]} />

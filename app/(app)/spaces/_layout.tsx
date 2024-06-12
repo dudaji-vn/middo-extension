@@ -1,5 +1,5 @@
 import { DeviceType, getDeviceTypeAsync } from 'expo-device';
-import { Tabs } from 'expo-router';
+import { Tabs, router } from 'expo-router';
 import { icons } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
@@ -43,10 +43,10 @@ export default function TabLayout() {
     getDeviceTypeAsync().then((deviceType) => {
       setDeviceType(deviceType);
     });
+    if (!accessToken) {
+      router.replace('/sign-in');
+    }
   }, []);
-  if (!accessToken) {
-    return null;
-  }
 
   return (
     <Tabs
@@ -74,7 +74,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      
+
       <Tabs.Screen
         name="settings"
         options={{
