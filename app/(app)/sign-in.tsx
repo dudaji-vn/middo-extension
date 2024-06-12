@@ -19,7 +19,7 @@ export default function LoginScreen() {
       source={require('~/assets/background.png')}
       style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
       <View position="absolute" top={96} left={0} px={8}>
-        <H3 color="$blue10Light"> Welcome to Middo's Extension!</H3>
+        <H3 color="$blue10Light"> Welcome to Middo Extension!</H3>
         <H6 paddingLeft={8} mt={4}>
           Seamless Translation & Conversation that empowering the Global communication
         </H6>
