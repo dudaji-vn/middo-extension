@@ -21,8 +21,8 @@ export const AuthProvider = () => {
     enabled: !!accessToken,
   });
   useEffect(() => {
-    if (accessToken || pathname.includes('sign-in')) return;
-    router.replace('/(app)/sign-in');
+    // router.replace('/force-sign-out');
+    if (accessToken || pathname.includes('sign-in')) router.replace('/spaces');
   }, [accessToken]);
   if (error?.message === 'Unauthorized' || error?.message === 'User not found') {
     logout();
