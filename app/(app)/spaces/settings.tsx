@@ -230,7 +230,7 @@ const PermissionItem = ({
       </View>
       <H6 color={color}>{title}</H6>
       <View ml="auto">
-        {type === PermissionStatus.GRANTED ? (x
+        {type === PermissionStatus.GRANTED ? (
           <CheckCircle2 size={20} color={color} />
         ) : (
           <ChevronRightIcon size={20} color={COLORS.NEUTRAL[700]} />
