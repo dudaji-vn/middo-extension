@@ -1,8 +1,6 @@
 import { PermissionStatus } from 'expo-camera';
 import { getPermissionsAsync } from 'expo-notifications';
 
-
-
 import { useNotification } from '~/features/notifications';
 import { getFCMToken } from '~/features/notifications/libs/fcm';
 import { signOut, useAuthStore } from '../auth';
