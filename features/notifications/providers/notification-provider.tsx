@@ -52,15 +52,17 @@ export const NotificationProvider = () => {
     notifee.setBadgeCount(0);
     return notifee.onForegroundEvent(({ type, detail }) => {
       const { notification } = detail;
-      const { url } = notification?.data as MessageData;
       console.log('Foreground event', type, detail);
       switch (type) {
         case EventType.DISMISSED:
-          console.log('User dismissed notification', detail.notification);
           break;
         case EventType.PRESS:
-          router.push('/spaces');
-          useWebviewStore.setState({ redirectUrl: url });
+          router.push('/(app)/spaces');
+          if (notification?.data?.url) {
+            useWebviewStore.setState({
+              redirectUrl: String(notification.data.url),
+            });
+          }
           break;
         case EventType.ACTION_PRESS:
           handleNotificationAction(detail);

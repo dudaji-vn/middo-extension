@@ -157,24 +157,21 @@ export const createTriggerNotification = async () => {
 };
 
 export const handleNotificationAction = async (detail: EventDetail) => {
+  console.log('handleNotificationAction::>  ', detail);
+  // LOG  Foreground event 3 {"notification": {"body": "Huyen: THÔNG BÁO KIỂM TRA", "data": {"body": "Huyen: THÔNG BÁO KIỂM TRA", "messageId": "666ac6fb61a47cc09cdde5be", "roomId": "666a96f961a47cc09cddc0c6", "title": "Middo", "url": "https://test.middo.app/spaces/663489fc86c145d82ac39d60/conversations/666a96f961a47cc09cddc0c6"}, "id": "Z16ou9e46cYBu9hKG1Rf", "ios": {"categoryId": "MESSAGE", "foregroundPresentationOptions": [Object], "sound": "default"}, "remote": false, "title": "Middo"}}
   const { notification, pressAction, input } = detail;
 
   const { roomId, url, messageId } = notification?.data as MessageData;
   if (!pressAction) return;
   switch (pressAction.id) {
-    case NotificationAction.REPLY:
-      if (roomId && input) {
-        messageApi.send({ content: input.trim(), roomId });
-      }
-      break;
-    case NotificationAction.VIEW_IN_DISCUSSION:
-      router.push('/spaces');
-      useWebviewStore.setState({
-        redirectUrl: url + `?r_tab=discussion&ms_id=${messageId}&${SPK_PLATFORM}=mobile`,
-      });
-      break;
     case NotificationAction.TURN_OFF_NOTIFICATIONS:
       await notificationApi.toggleRoomNotification(roomId);
+      break;
+
+    case NotificationAction.DEFAULT:
+      console.log('Default action:: ', url);
+      router.push('/spaces');
+      useWebviewStore.setState({ redirectUrl: url });
       break;
   }
 };
