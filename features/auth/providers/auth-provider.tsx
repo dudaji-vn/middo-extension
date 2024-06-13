@@ -12,7 +12,11 @@ export const AuthProvider = () => {
   const { error } = useQuery({
     queryKey: ['user', accessToken],
     queryFn: async () => {
-      const res = await axios.get('auth/me');
+      const res = await axios.get('auth/me').catch((err) => {
+        console.error('failed fetching profile', err);
+        router.replace('/force-sign-out');
+        return { data: null };
+      });
       setLogged(true);
       setUser(res.data);
       return res.data;
