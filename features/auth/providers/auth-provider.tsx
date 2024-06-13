@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { router, usePathname } from 'expo-router';
 import { useEffect } from 'react';
 
-import { useAuthStore } from '../stores';
+import { useAuthStore, useNotificationStore } from '../stores';
 
 import { axios } from '~/libs';
 
@@ -12,11 +12,7 @@ export const AuthProvider = () => {
   const { error } = useQuery({
     queryKey: ['user', accessToken],
     queryFn: async () => {
-      const res = await axios.get('auth/me').catch((err) => {
-        console.error('failed fetching profile', err);
-        router.replace('/force-sign-out');
-        return { data: null };
-      });
+      const res = await axios.get('auth/me');
       setLogged(true);
       setUser(res.data);
       return res.data;
