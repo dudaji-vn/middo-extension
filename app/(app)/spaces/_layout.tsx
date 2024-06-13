@@ -3,7 +3,7 @@ import { Tabs, router } from 'expo-router';
 import { icons } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
-import { Avatar, View } from 'tamagui';
+import { Avatar, Button, View } from 'tamagui';
 
 import { useAuthStore } from '~/features/auth';
 import { useWebviewStore } from '~/stores';
@@ -65,6 +65,12 @@ export default function TabLayout() {
           fontWeight: '400',
         },
       }}>
+      <Button
+        onPress={() => {
+          console.log('Sign In');
+        }}>
+        Sign In
+      </Button>
       <Tabs.Screen
         name="index"
         options={{
