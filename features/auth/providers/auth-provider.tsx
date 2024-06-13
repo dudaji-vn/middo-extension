@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { router, usePathname } from 'expo-router';
 import { useEffect } from 'react';
 
-import { useAuthStore } from '../stores';
+import { useAuthStore, useNotificationStore } from '../stores';
 
 import { axios } from '~/libs';
 
@@ -21,8 +21,14 @@ export const AuthProvider = () => {
     enabled: !!accessToken,
   });
   useEffect(() => {
-    // router.replace('/force-sign-out');
-    if (accessToken || pathname.includes('sign-in')) router.replace('/spaces');
+    if (pathname === '/') {
+      if (accessToken) router.replace('/spaces');
+      else router.replace('/sign-in');
+    }
+  }, [pathname, accessToken]);
+  useEffect(() => {
+    if (accessToken || pathname.includes('sign-in')) return;
+    router.replace('/(app)/sign-in');
   }, [accessToken]);
   if (error?.message === 'Unauthorized' || error?.message === 'User not found') {
     logout();

@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { BellRingIcon } from 'lucide-react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ImageBackground } from 'react-native';
 import { H3, H6, Theme, YStack } from 'tamagui';
 
@@ -10,11 +10,12 @@ import { getFCMToken } from '~/features/notifications/libs/fcm';
 import { Button } from '~/tamagui.config';
 
 export default function PermissionScreen() {
-  const { setIsAskLater, setFcmToken, setIsSubscribed } = useNotificationStore();
+  const { setIsAskLater, setFcmToken, setIsSubscribed, fcmToken } = useNotificationStore();
   const handleTurnOnNotifications = async () => {
     try {
       await turnOnNotifications();
       const token = await getFCMToken();
+      console.log('PermissionScreen token:::>>', token);
       await notificationApi.subscribe(token);
       setFcmToken(token);
       setIsSubscribed(true);
@@ -35,6 +36,9 @@ export default function PermissionScreen() {
     // }
     router.replace('/spaces');
   };
+  useEffect(() => {
+    console.log('PermissionScreen fcmToken:', fcmToken);
+  }, [fcmToken]);
   return (
     <ImageBackground
       resizeMode="cover"

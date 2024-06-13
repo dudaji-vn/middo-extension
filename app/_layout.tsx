@@ -1,7 +1,8 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import 'expo-dev-client';
-import { Slot } from 'expo-router';
+import { Slot, SplashScreen } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { TamaguiProvider, Theme } from 'tamagui';

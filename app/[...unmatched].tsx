@@ -1,9 +1,14 @@
-import { Link, Stack, router } from 'expo-router';
+import { Link, Stack, router, usePathname } from 'expo-router';
 import { YStack } from 'tamagui';
 
 import { Container, Main, Subtitle, Title } from '../tamagui.config';
+import { useEffect } from 'react';
 
 export default function NotFoundScreen() {
+  const pathname = usePathname();
+  useEffect(() => {
+    console.log('Not found screen: ', pathname);
+  }, [pathname]);
   return (
     <Container>
       <Stack.Screen options={{ title: 'Oops!' }} />
