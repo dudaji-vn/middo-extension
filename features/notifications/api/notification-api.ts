@@ -4,7 +4,10 @@ const basePath = '/notifications';
 
 export const notificationApi = {
   async subscribe(token: string) {
-    const res = await axios.post(`${basePath}/subscribe`, { token });
+    const res = await axios.post(`${basePath}/subscribe`, {
+      token,
+      type: 'extension',
+    });
     return res.data;
   },
   async unsubscribe(token: string) {
