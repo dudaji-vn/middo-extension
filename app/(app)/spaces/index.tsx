@@ -40,6 +40,7 @@ export default function SpacesList() {
         onNavigationStateChange={onNavigationStateChange}
         injectedJavaScript={debugging}
         onContentProcessDidTerminate={() => {
+          console.log('Content process terminated');
           webviewRef.current?.reload();
         }}
         source={{ uri }}

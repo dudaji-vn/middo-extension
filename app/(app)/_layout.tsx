@@ -5,6 +5,7 @@ import { MiddoLogo } from '~/components/icons';
 import { Stack } from '~/components/uis/stack';
 
 export default function AppLayout() {
+  
   return (
     <Stack
       screenOptions={{
