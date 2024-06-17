@@ -16,18 +16,33 @@ export const useWebviewTokens = (webviewRef: React.RefObject<WebView>) => {
     storeTokens: state.storeTokens,
     logout: state.logout,
   }));
-  const setCurrentRoomId = useWebviewStore((state) => state.setCurrentRoomId);
+  const { setCurrentRoomId, setCurrentSpaceId } = useWebviewStore();
 
   const onNavigationStateChange = (navigationState: WebViewNavigation) => {
+    console.log('\n \n onNavigationStateChange: ', navigationState.url);
+    console.log('\n \n webviewRef.current: ', webviewRef.current);
+    const hasSearchParam = navigationState.url.includes('?');
+    const hasPlatformSPK = navigationState.url.includes('platform=');
     if (webviewRef.current) {
       webviewRef.current.injectJavaScript(CHECK_COOKIE);
     }
+    if (!hasPlatformSPK) {
+      useWebviewStore.setState({
+        redirectUrl: `${navigationState.url}` + (hasSearchParam ? '&' : '?') + 'platform=mobile',
+      });
+      return;
+    }
     const roomId = extractRoomIdFormUrl(navigationState.url);
+    const spaceId = extractSpaceIdFormUrl(navigationState.url);
+    console.log('roomId::>', roomId);
+    console.log('spaceId::>', spaceId);
     setCurrentRoomId(roomId);
+    setCurrentSpaceId(spaceId);
   };
 
   const onMessage = (event: NativeSyntheticEvent<WebViewMessage>) => {
     const { data } = event.nativeEvent;
+    console.log('onMessage:::: >>  ', data);
 
     if (data.includes('Cookie:')) {
       const cookie = data.replace('Cookie: ', '').trim();
@@ -59,6 +74,7 @@ export const useWebviewTokens = (webviewRef: React.RefObject<WebView>) => {
               requestMicrophonePermissionsAsync();
               break;
             default:
+              console.log('Unknown event', payload?.data.event, payload?.data.roomId);
               break;
           }
           break;
@@ -90,17 +106,14 @@ function extractRoomIdFormUrl(url: string): string | null {
   }
   return null;
 }
-
-const handleMessagesClick = (payload: any) => {
-  switch (payload?.event) {
-    case 'start-call':
-      console.log('start-call', payload.roomId);
-
-      break;
-    default:
-      break;
+function extractSpaceIdFormUrl(url: string): string | null {
+  const match = url.match(/spaces\/([^?]+)/);
+  if (match) {
+    const spaceId = match[1]?.split('/')[0];
+    return spaceId || null;
   }
-};
+  return null;
+}
 
 const handleMessagesConsole = (payload: any) => {
   switch (payload?.type) {
