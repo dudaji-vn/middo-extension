@@ -21,9 +21,16 @@ export const useWebviewTokens = (webviewRef: React.RefObject<WebView>) => {
   const onNavigationStateChange = (navigationState: WebViewNavigation) => {
     console.log('\n \n onNavigationStateChange: ', navigationState.url);
     console.log('\n \n webviewRef.current: ', webviewRef.current);
-
+    const hasSearchParam = navigationState.url.includes('?');
+    const hasPlatformSPK = navigationState.url.includes('platform=');
     if (webviewRef.current) {
       webviewRef.current.injectJavaScript(CHECK_COOKIE);
+    }
+    if (!hasPlatformSPK) {
+      useWebviewStore.setState({
+        redirectUrl: `${navigationState.url}` + (hasSearchParam ? '&' : '?') + 'platform=mobile',
+      });
+      return;
     }
     const roomId = extractRoomIdFormUrl(navigationState.url);
     const spaceId = extractSpaceIdFormUrl(navigationState.url);
@@ -68,7 +75,6 @@ export const useWebviewTokens = (webviewRef: React.RefObject<WebView>) => {
               break;
             default:
               console.log('Unknown event', payload?.data.event, payload?.data.roomId);
-
               break;
           }
           break;
@@ -108,17 +114,6 @@ function extractSpaceIdFormUrl(url: string): string | null {
   }
   return null;
 }
-
-const handleMessagesClick = (payload: any) => {
-  switch (payload?.event) {
-    case 'start-call':
-      console.log('start-call', payload.roomId);
-
-      break;
-    default:
-      break;
-  }
-};
 
 const handleMessagesConsole = (payload: any) => {
   switch (payload?.type) {

@@ -30,10 +30,10 @@ export default function PermissionScreen() {
   };
   const handleAskLater = () => {
     setIsAskLater(true);
-    // if (router.canGoBack()) {
-    //   router.back();
-    //   return;
-    // }
+    if (router.canGoBack()) {
+      router.back();
+      return;
+    }
     router.replace('/spaces');
   };
   useEffect(() => {
