@@ -37,18 +37,6 @@ export const setupNotificationCategories = async () => {
       id: NotificationCategory.MESSAGE,
       actions: [
         {
-          id: NotificationAction.REPLY,
-          title: 'Reply',
-          input: {
-            placeholderText: 'Send a message...',
-            buttonText: 'Send',
-          },
-        },
-        {
-          id: NotificationAction.VIEW_IN_DISCUSSION,
-          title: 'View in Discussion',
-        },
-        {
           id: NotificationAction.TURN_OFF_NOTIFICATIONS,
           title: 'Turn off Notifications',
         },
@@ -80,13 +68,6 @@ export const displayNotification = async ({
           id: 'default',
         },
         actions: [
-          {
-            title: 'Reply',
-            pressAction: {
-              id: NotificationAction.REPLY,
-            },
-            input: true,
-          },
           {
             title: 'Turn off Notifications',
             pressAction: {
