@@ -1,6 +1,7 @@
 export const WEB_URL = process.env.EXPO_PUBLIC_WEB_URL as string;
 export const VERSION = process.env.EXPO_PUBLIC_VERSION as string;
 export const API_URL = process.env.EXPO_PUBLIC_API_URL as string;
+export const APP_NAME = (process.env.APP_NAME as string) || 'Middo Extension';
 export const GOOGLE_WEB_CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID as string;
 export const GOOGLE_IOS_CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID as string;
 

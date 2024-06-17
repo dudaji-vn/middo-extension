@@ -5,12 +5,15 @@ import { NotificationCategory } from '../types';
 
 import { messaging } from '~/libs';
 import { useWebviewStore } from '~/stores';
+import { APP_NAME } from '~/configs/env.config';
 
 export async function onMessageReceived(message: FirebaseMessagingTypes.RemoteMessage) {
-  console.log('onMessageReceived:::>>>', message);
   const messageRoomId = message.data?.roomId;
   const currentRoomId = useWebviewStore.getState().currentRoomId;
-  if (messageRoomId === currentRoomId) return;
+  const isWatchingRoom = messageRoomId === currentRoomId;
+  const isFormExtension = message.data?.type === 'extension' || message.data?.title === APP_NAME;
+  const doNotNotify = isWatchingRoom || !isFormExtension;
+  if (doNotNotify) return;
   displayNotification({
     body: message.notification?.body || (message?.data?.body as string) || '',
     data: message.data,
