@@ -8,7 +8,6 @@ import { useWebviewStore } from '~/stores';
 import { APP_NAME } from '~/configs/env.config';
 
 export async function onMessageReceived(message: FirebaseMessagingTypes.RemoteMessage) {
-  console.log('onMessageReceived:::>>>', message);
   const messageRoomId = message.data?.roomId;
   const currentRoomId = useWebviewStore.getState().currentRoomId;
   const isWatchingRoom = messageRoomId === currentRoomId;
