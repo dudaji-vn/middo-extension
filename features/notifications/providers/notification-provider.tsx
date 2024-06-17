@@ -1,7 +1,6 @@
 import notifee, { AuthorizationStatus, EventType } from '@notifee/react-native';
 import { router } from 'expo-router';
 import { useEffect } from 'react';
-import { Platform } from 'react-native';
 
 import { useNotification } from '../hooks';
 import { onMessageReceived } from '../libs/fcm';
@@ -14,6 +13,8 @@ import {
 import { useAuthStore } from '~/features/auth';
 import { messaging } from '~/libs/firebase';
 import { useWebviewStore } from '~/stores';
+import { SPK_PLATFORM } from '~/configs/search-params.config';
+import { Platform } from 'react-native';
 
 export const NotificationProvider = () => {
   const isLogged = useAuthStore((state) => state.isLogged);
@@ -60,7 +61,7 @@ export const NotificationProvider = () => {
           router.push('/(app)/spaces');
           if (notification?.data?.url) {
             useWebviewStore.setState({
-              redirectUrl: String(notification.data.url),
+              redirectUrl: String(notification.data.url + `?${SPK_PLATFORM}=mobile`),
             });
           }
           break;

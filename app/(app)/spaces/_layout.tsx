@@ -76,7 +76,7 @@ export default function TabLayout() {
         options={{
           title: 'Extension',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon focused={focused} name="MessagesSquare" color={color} />
+            <TabBarIcon focused={focused} name="Blocks" color={color} />
           ),
         }}
       />
