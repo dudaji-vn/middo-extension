@@ -53,12 +53,13 @@ export const NotificationProvider = () => {
     notifee.setBadgeCount(0);
     return notifee.onForegroundEvent(({ type, detail }) => {
       const { notification } = detail;
-      console.log('Foreground event', type, detail);
+      console.log('Foreground event::>', type, detail);
       switch (type) {
         case EventType.DISMISSED:
           break;
         case EventType.PRESS:
           router.push('/(app)/spaces');
+          console.log('Notification data:', notification?.data);
           if (notification?.data?.url) {
             useWebviewStore.setState({
               redirectUrl: String(notification.data.url + `?${SPK_PLATFORM}=mobile`),

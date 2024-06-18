@@ -11,11 +11,11 @@ export const notificationApi = {
     return res.data;
   },
   async unsubscribe(token: string) {
-    const res = await axios.post(`${basePath}/unsubscribe`, { token });
+    const res = await axios.post(`${basePath}/unsubscribe`, { token, type: 'extension' });
     return res.data;
   },
   async checkSubscription(token: string) {
-    const res = await axios.post(`${basePath}/check`, { token });
+    const res = await axios.post(`${basePath}/check`, { token, type: 'extension' });
     return res.data;
   },
   async toggleRoomNotification(roomId: string) {

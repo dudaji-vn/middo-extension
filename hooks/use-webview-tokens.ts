@@ -42,7 +42,7 @@ export const useWebviewTokens = (webviewRef: React.RefObject<WebView>) => {
 
   const onMessage = (event: NativeSyntheticEvent<WebViewMessage>) => {
     const { data } = event.nativeEvent;
-    console.log('onMessage:::: >>  ', data);
+    console.log('\n ====== \n onMessage:::: >>  ', JSON.stringify(data));
 
     if (data.includes('Cookie:')) {
       const cookie = data.replace('Cookie: ', '').trim();
