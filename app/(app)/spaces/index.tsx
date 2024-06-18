@@ -17,7 +17,7 @@ export default function SpacesList() {
   const { onMessage, onNavigationStateChange } = useWebviewTokens(webviewRef);
   useWebviewGesture(webviewRef);
   useEffect(() => {
-    console.log('Spaces mounted', accessToken, refreshToken);
+    console.log('Spaces mounted');
   }, []);
   return (
     <SafeAreaLayout>

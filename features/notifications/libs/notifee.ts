@@ -143,6 +143,7 @@ export const handleNotificationAction = async (detail: EventDetail) => {
 
   const { roomId, url, messageId } = notification?.data as MessageData;
   if (!pressAction) return;
+  console.log('handleNotificationAction::> press::  ', pressAction);
   switch (pressAction.id) {
     case NotificationAction.TURN_OFF_NOTIFICATIONS:
       await notificationApi.toggleRoomNotification(roomId);

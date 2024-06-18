@@ -11,6 +11,7 @@ export async function onMessageReceived(message: FirebaseMessagingTypes.RemoteMe
   const messageRoomId = message.data?.roomId;
   const currentRoomId = useWebviewStore.getState().currentRoomId;
   const isWatchingRoom = messageRoomId === currentRoomId;
+  console.log('\n ====== \n onMessageRêcived:::: >>  ', message);
   const isFormExtension = message.data?.title?.toString().startsWith(APP_NAME);
   const doNotNotify = isWatchingRoom || !isFormExtension;
   if (doNotNotify) return;
