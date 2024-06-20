@@ -18,6 +18,11 @@ export default function LoginScreen() {
     });
     router.replace('/spaces');
   };
+  useEffect(() => {
+    if (accessToken) {
+      router.replace('/spaces');
+    }
+  }, [accessToken]);
 
   return (
     <ImageBackground
