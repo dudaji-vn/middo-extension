@@ -60,6 +60,8 @@ yarn-error.*
 # local env files
 .env*.local
 
+eas.json
+
 # typescript
 *.tsbuildinfo
 
