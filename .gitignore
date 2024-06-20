@@ -10,7 +10,10 @@ npm-debug.*
 *.orig.*
 web-build/
 # expo router
+.tamagui/
+eas.json
 expo-env.d.ts
+
 
 *.env
 *.plist
@@ -59,8 +62,6 @@ yarn-error.*
 
 # local env files
 .env*.local
-
-eas.json
 
 # typescript
 *.tsbuildinfo
