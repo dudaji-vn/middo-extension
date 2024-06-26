@@ -12,7 +12,6 @@ import { notificationApi } from '../api';
 import { NotificationAction, NotificationCategory } from '../types';
 
 import { SPK_PLATFORM } from '~/configs/search-params.config';
-import { messageApi } from '~/features/chat/messages';
 import { useWebviewStore } from '~/stores';
 
 export const turnOnNotifications = async () => {
@@ -152,7 +151,7 @@ export const handleNotificationAction = async (detail: EventDetail) => {
     case NotificationAction.DEFAULT:
       console.log('Default action:: ', url);
       router.push('/spaces');
-      useWebviewStore.setState({ redirectUrl: url });
+      useWebviewStore.setState({ redirectUrl: url + `?${SPK_PLATFORM}=mobile` });
       break;
   }
 };
